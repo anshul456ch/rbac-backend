@@ -10,6 +10,8 @@ const authRoutes = require("./routes/authRoutes");
 // (you can later add more like roleRoutes, permissionRoutes, etc.)
 const roleRoutes = require("./routes/roleRoutes");
 
+const projectRoutes = require("./routes/projectRoutes");
+
 const app = express();
 
 // ✅ Middlewares
@@ -24,6 +26,7 @@ app.get("/", (req, res) => {
 // ✅ Mount routes
 app.use("/auth", authRoutes);
 app.use("/roles", roleRoutes); // Mount role routes
+app.use("/projects", projectRoutes);
 
 // ✅ Port from .env or default
 const PORT = process.env.PORT || 5000;
