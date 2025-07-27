@@ -5,9 +5,11 @@ const {
   createRole,
   createPermission,
   assignRoleToUser,
-  assignPermissionToRole
+  assignPermissionToRole,
+  getRoles
 } = require('../controllers/roleController'); // ✅ path is correct
 
+router.get('/', getRoles);      // GET /roles
 router.post('/', createRole);
 router.post('/permission', createPermission);
 router.post('/assign-role', assignRoleToUser);

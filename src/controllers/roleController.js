@@ -1,4 +1,16 @@
 const { Permission, User, Role } = require("../../models");
+
+// ✅ getRoles
+exports.getRoles = async (req, res) => {
+  try {
+    const roles = await Role.findAll({ include: Permission });
+    res.json(roles);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error fetching roles' });
+  }
+};
+
 // ✅ createRole
 exports.createRole = async (req, res) => {
   try {
