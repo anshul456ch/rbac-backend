@@ -11,6 +11,8 @@ const authRoutes = require("./routes/authRoutes");
 const roleRoutes = require("./routes/roleRoutes");
 
 const projectRoutes = require("./routes/projectRoutes");
+const redis = require('./config/redisClient');
+
 
 const app = express();
 

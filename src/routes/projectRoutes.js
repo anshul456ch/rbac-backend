@@ -1,19 +1,31 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-// ✅ import middlewares
-const { verifyToken } = require('../middlewares/auth');
-const checkPermission = require('../middlewares/checkPermission');
+const { verifyToken } = require("../middlewares/auth");
+const checkPermission = require("../middlewares/checkPermission");
+const {
+  createProject,
+  getProjects,
+  deleteProject,
+} = require("../controllers/projectController");
 
-// ✅ Example protected route
-router.delete(
-  '/:id',
+// Create a project (requires create:project)
+router.post(
+  "/",
   verifyToken,
-  checkPermission('delete', 'project'),
-  (req, res) => {
-    // here you would call your controller or logic
-    res.json({ message: `Project with id ${req.params.id} deleted` });
-  }
+  checkPermission("create", "project"),
+  createProject
+);
+
+// List all projects (requires read:project or skip permission if open)
+router.get("/", verifyToken, checkPermission("read", "project"), getProjects);
+
+// Delete a project (requires delete:project)
+router.delete(
+  "/:id",
+  verifyToken,
+  checkPermission("delete", "project"),
+  deleteProject
 );
 
 module.exports = router;
